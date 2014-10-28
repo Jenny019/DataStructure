@@ -52,15 +52,15 @@ void reverse(SeqList * list){
 	}
 }
 
-int main() {
-	SeqList list;
-	list.data[0] = 0;
-	list.data[1] = 2;
-	list.length = 2;
-	insert(&list, 2, 1);
-	printf("%d %d %d\n", list.data[0], list.data[1], list.data[2]);
-	reverse(&list);
-	printf("%d %d %d\n", list.data[0], list.data[1], list.data[2]);
-	printf("%d", delete(&list, 1));
-	return 1;
-}
+//int main() {
+//	SeqList list;
+//	list.data[0] = 0;
+//	list.data[1] = 2;
+//	list.length = 2;
+//	insert(&list, 2, 1);
+//	printf("%d %d %d\n", list.data[0], list.data[1], list.data[2]);
+//	reverse(&list);
+//	printf("%d %d %d\n", list.data[0], list.data[1], list.data[2]);
+//	printf("%d", delete(&list, 1));
+//	return 1;
+//}
