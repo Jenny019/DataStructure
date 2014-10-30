@@ -9,6 +9,14 @@ typedef struct node {
 
 typedef ListNode * LinkedList;
 
+void printLinkedList(LinkedList head) {
+	ListNode *p = head;
+	while (p) {
+		printf("%d ", p->data);
+		p = p->next;
+	}
+}
+
 // 头插法建表
 LinkedList createListHead() {
 	LinkedList head = NULL;
@@ -196,14 +204,6 @@ int deleteLinkedList(LinkedList head, int i) {
 	return -1;
 }
 
-void printLinkedList(LinkedList head) {
-	ListNode *p = head;
-	while (p) {
-		printf("%d ", p->data);
-		p = p->next;
-	}
-}
-
 // split list a to list a and b, a containing odd nodes, b containing even nodes
 void split(LinkedList a, LinkedList b) {
 	ListNode *p = a->next, *r = a, *s = b;
@@ -240,12 +240,55 @@ LinkedList merge(LinkedList a, LinkedList b) {
 	return c;
 }
 
-//int main() {
-//	LinkedList list = createListRearWithHeader();
-//	insertSortedList(list, 4);
+// reverse node p with its next node
+void reverseCurrentAndNext(LinkedList head, ListNode *p) {
+	ListNode *cur = head, *q = NULL;
+	if (!p || !head || p == head) {
+		return;
+	}
+	while (cur && cur->next != p) {
+		cur = cur->next;
+	}
+	if (!cur || !cur->next->next) {
+		return;
+	}
+	q = p->next;
+	p->next = q->next;
+	q->next = p;
+	cur->next = q;
+}
+
+// compute a sorted linked list of the intersect of two sorted linked list
+LinkedList intersect(LinkedList listA, LinkedList listB) {
+	LinkedList listC;
+	ListNode *p = listA, *q = listB, *k = listA, *cur = listC;
+	for (; q; q = q->next) {
+		for (p = k; p; p = p->next) {
+			if (p->data <= q->data) {
+				k = p;
+			} else {
+				continue;
+			}
+			if (p->data == q->data) {
+//				printf("%d ", p->data);
+				ListNode *newNode = malloc(sizeof(ListNode));
+				newNode->data = p->data;
+				cur->next = newNode;
+				cur = newNode;
+			}
+		}
+	}
+	return listC;
+}
+
+int main() {
+	LinkedList listA = createListRear();
+	LinkedList listB = createListRear();
+	LinkedList listC = intersect(listA, listB);
+	//	insertSortedList(list, 4);
 //	insertSortedList(list, 3);
 //	insertSortedList(list, 0);
-//	printLinkedList(list);
-//	return 0;
-//}
+	printLinkedList(listC);
+	return 0;
+}
 
