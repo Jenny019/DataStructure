@@ -155,6 +155,22 @@ void insertLinkedList(LinkedList head, int i, int x) {
 	}
 }
 
+// insert x into a sorted linked list with header
+void insertSortedList(LinkedList head, int x) {
+	ListNode *p = head, *s = malloc(sizeof(ListNode));
+	s->data = x;
+	s->next = NULL;
+	while (p) {
+		if ((p->next && p->next->data >= x) || !p->next) {
+			break;
+		}
+		p = p->next;
+	}
+	s->next = p->next;
+	p->next = s;
+	return;
+}
+
 // delete the ith node
 int deleteLinkedList(LinkedList head, int i) {
 	ListNode *p = head, *temp = NULL;
@@ -188,19 +204,48 @@ void printLinkedList(LinkedList head) {
 	}
 }
 
-int main() {
-	LinkedList list = createListRearWithHeader();
-	/*printf("%d %d %d", find(list, 1)->data, find(list, 2)->data,
-	 find(list, 3)->data);*/
-	insertLinkedList(list, 1, 5);
-	insertLinkedList(list, 2, 6);
-	insertLinkedList(list, 6, 7);
-	printLinkedList(list);
-	printf("\n");
-	deleteLinkedList(list, 1);
-	deleteLinkedList(list, 2);
-	deleteLinkedList(list, 3);
-	printLinkedList(list);
-	return 0;
+// split list a to list a and b, a containing odd nodes, b containing even nodes
+void split(LinkedList a, LinkedList b) {
+	ListNode *p = a->next, *r = a, *s = b;
+	while (p) {
+		r->next = p;
+		r = p;
+		p = p->next;
+		if (p) {
+			s->next = p;
+			s = p;
+			p = p->next;
+		}
+	}
+	r->next = NULL;
+	s->next = NULL;
 }
+
+LinkedList merge(LinkedList a, LinkedList b) {
+	LinkedList c = a;
+	ListNode *r = a->next, *s = b->next, *p = c;
+	while (r && s) {
+		if (r->data <= s->data) {
+			p->next = r;
+			p = r;
+			r = r->next;
+		} else {
+			p->next = s;
+			p = s;
+			s = s->next;
+		}
+	}
+	p->next = (r) ? r : s;
+	free(b);
+	return c;
+}
+
+//int main() {
+//	LinkedList list = createListRearWithHeader();
+//	insertSortedList(list, 4);
+//	insertSortedList(list, 3);
+//	insertSortedList(list, 0);
+//	printLinkedList(list);
+//	return 0;
+//}
 
