@@ -260,24 +260,32 @@ void reverseCurrentAndNext(LinkedList head, ListNode *p) {
 
 // compute a sorted linked list of the intersect of two sorted linked list
 LinkedList intersect(LinkedList listA, LinkedList listB) {
-	LinkedList listC;
-	ListNode *p = listA, *q = listB, *k = listA, *cur = listC;
+	LinkedList listC = malloc(sizeof(ListNode));
+	if (!listC) {
+		printf("malloc failed.");
+		return NULL;
+	}
+	listC->next = NULL;
+	ListNode *p = listA, *q = listB, *k = listA, *cur = listC, *temp = NULL;
 	for (; q; q = q->next) {
+		free(q);
 		for (p = k; p; p = p->next) {
+			free(temp);
 			if (p->data <= q->data) {
 				k = p;
 			} else {
 				continue;
 			}
 			if (p->data == q->data) {
-//				printf("%d ", p->data);
-				ListNode *newNode = malloc(sizeof(ListNode));
-				newNode->data = p->data;
-				cur->next = newNode;
-				cur = newNode;
+				cur->next = p;
+				cur = p;
+			} else {
+				temp = p;
 			}
 		}
+		temp = q;
 	}
+	cur->next = NULL;
 	return listC;
 }
 
