@@ -289,14 +289,14 @@ LinkedList intersect(LinkedList listA, LinkedList listB) {
 	return listC;
 }
 
-int main() {
-	LinkedList listA = createListRear();
-	LinkedList listB = createListRear();
-	LinkedList listC = intersect(listA, listB);
-	//	insertSortedList(list, 4);
-//	insertSortedList(list, 3);
-//	insertSortedList(list, 0);
-	printLinkedList(listC);
-	return 0;
-}
-
+//int main() {
+//	LinkedList listA = createListRear();
+//	LinkedList listB = createListRear();
+//	LinkedList listC = intersect(listA, listB);
+//	//	insertSortedList(list, 4);
+////	insertSortedList(list, 3);
+////	insertSortedList(list, 0);
+//	printLinkedList(listC);
+//	return 0;
+//}
+//

@@ -87,7 +87,7 @@ void conversion(int i, int d) {
 		seqPush(&stack, i % d);
 		i /= d;
 	}
-	while (!SeqIsEmpty(&stack)) {
+	while (!seqIsEmpty(&stack)) {
 		printf("%d", seqPop(&stack));
 	}
 }
