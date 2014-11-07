@@ -24,7 +24,7 @@ void seqEnqueue(SeqQueue *queue, char x) {
 	queue->data[queue->rear++] = x;
 }
 
-char seqQueueDequeue(SeqQueue *queue) {
+char seqDequeue(SeqQueue *queue) {
 	if (seqQueueIsEmpty(queue)) {
 		printf("queque is empty");
 		exit(0);
@@ -34,10 +34,14 @@ char seqQueueDequeue(SeqQueue *queue) {
 	return temp;
 }
 
-char peek(SeqQueue *queue) {
+char seqQueuePeek(SeqQueue *queue) {
 	if (seqQueueIsEmpty(queue)) {
 		printf("queque is empty");
 		exit(0);
 	}
 	return queue->data[queue->front];
 }
+
+//int main(){
+//	return 0;
+//}
